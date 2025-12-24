@@ -1,0 +1,202 @@
+<Page x:Class="Project.Pages.LedgerViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Title="Ledger View" 
+      Background="{StaticResource BackgroundColor}">
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="32">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Page Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,32">
+                <TextBlock Text="📊 Ledger View" 
+                         FontSize="32" 
+                         FontWeight="Bold"
+                         Foreground="{StaticResource TextPrimaryColor}"
+                         Margin="0,0,0,8"
+                         TextOptions.TextFormattingMode="Display"
+                         TextOptions.TextRenderingMode="ClearType"/>
+                <TextBlock Text="View customer ledger, debit/credit history, and transaction details"
+                         FontSize="16"
+                         Foreground="{StaticResource TextSecondaryColor}"
+                         TextOptions.TextFormattingMode="Display"
+                         TextOptions.TextRenderingMode="ClearType"/>
+            </StackPanel>
+            
+            <!-- Customer Selection -->
+            <Border Grid.Row="1" 
+                  Style="{StaticResource CardStyle}"
+                  Margin="0,0,0,24">
+                <StackPanel Margin="24">
+                    <TextBlock Text="Select Customer for Ledger View" 
+                             FontSize="16" 
+                             FontWeight="SemiBold"
+                             Foreground="{StaticResource TextPrimaryColor}"
+                             Margin="0,0,0,12"
+                             TextOptions.TextFormattingMode="Display"
+                             TextOptions.TextRenderingMode="ClearType"/>
+                    <ComboBox x:Name="cmbSelectCustomer" 
+                            Style="{StaticResource ModernComboBoxStyle}"
+                            Height="40"
+                            DisplayMemberPath="Name"
+                            SelectedValuePath="CustomerId"
+                            SelectionChanged="CmbSelectCustomer_SelectionChanged"/>
+                </StackPanel>
+            </Border>
+            
+            <!-- Ledger View -->
+            <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+                <Grid Margin="24">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Summary Cards -->
+                    <StackPanel Grid.Row="0" 
+                              Orientation="Horizontal" 
+                              Margin="0,0,0,24">
+                        <Border Background="#E3F2FD" 
+                              CornerRadius="8" 
+                              Padding="20" 
+                              Margin="0,0,16,0"
+                              MinWidth="200">
+                            <StackPanel>
+                                <TextBlock Text="Running Balance" 
+                                         FontSize="12" 
+                                         Foreground="{StaticResource TextSecondaryColor}"
+                                         Margin="0,0,0,4"
+                                         TextOptions.TextFormattingMode="Display"
+                                         TextOptions.TextRenderingMode="ClearType"/>
+                                <TextBlock x:Name="txtRunningBalance" 
+                                         Text="0.00" 
+                                         FontSize="24" 
+                                         FontWeight="Bold"
+                                         Foreground="{StaticResource PrimaryColor}"
+                                         TextOptions.TextFormattingMode="Display"
+                                         TextOptions.TextRenderingMode="ClearType"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Background="#FFF3E0" 
+                              CornerRadius="8" 
+                              Padding="20" 
+                              Margin="0,0,16,0"
+                              MinWidth="200">
+                            <StackPanel>
+                                <TextBlock Text="Outstanding Amount" 
+                                         FontSize="12" 
+                                         Foreground="{StaticResource TextSecondaryColor}"
+                                         Margin="0,0,0,4"
+                                         TextOptions.TextFormattingMode="Display"
+                                         TextOptions.TextRenderingMode="ClearType"/>
+                                <TextBlock x:Name="txtOutstandingAmount" 
+                                         Text="0.00" 
+                                         FontSize="24" 
+                                         FontWeight="Bold"
+                                         Foreground="{StaticResource WarningColor}"
+                                         TextOptions.TextFormattingMode="Display"
+                                         TextOptions.TextRenderingMode="ClearType"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Background="#E8F5E9" 
+                              CornerRadius="8" 
+                              Padding="20" 
+                              MinWidth="200">
+                            <StackPanel>
+                                <TextBlock Text="Total Credit" 
+                                         FontSize="12" 
+                                         Foreground="{StaticResource TextSecondaryColor}"
+                                         Margin="0,0,0,4"
+                                         TextOptions.TextFormattingMode="Display"
+                                         TextOptions.TextRenderingMode="ClearType"/>
+                                <TextBlock x:Name="txtTotalCredit" 
+                                         Text="0.00" 
+                                         FontSize="24" 
+                                         FontWeight="Bold"
+                                         Foreground="{StaticResource SuccessColor}"
+                                         TextOptions.TextFormattingMode="Display"
+                                         TextOptions.TextRenderingMode="ClearType"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    
+                    <!-- Ledger Header -->
+                    <Grid Grid.Row="1" Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Text="Ledger View - Debit/Credit History" 
+                                 FontSize="20" 
+                                 FontWeight="SemiBold"
+                                 Foreground="{StaticResource TextPrimaryColor}"
+                                 TextOptions.TextFormattingMode="Display"
+                                 TextOptions.TextRenderingMode="ClearType"/>
+                        
+                        <Button Grid.Column="1"
+                              Content="Link to Plots/Projects" 
+                              Style="{StaticResource SecondaryButtonStyle}"
+                              Width="180"
+                              Height="36"
+                              Click="BtnLinkToPlots_Click"/>
+                    </Grid>
+                    
+                    <!-- Ledger Data Grid -->
+                    <DataGrid x:Name="dgLedger" 
+                            Grid.Row="2"
+                            Style="{StaticResource ModernDataGridStyle}"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            IsReadOnly="True"
+                            SelectionMode="Single"
+                            SelectionChanged="DgLedger_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=dd/MM/yyyy}" Width="120"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                            <DataGridTextColumn Header="Reference" Binding="{Binding Reference}" Width="150"/>
+                            <DataGridTextColumn Header="Debit" Binding="{Binding Debit, StringFormat=C}" Width="150">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="{StaticResource ErrorColor}"/>
+                                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Credit" Binding="{Binding Credit, StringFormat=C}" Width="150">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="{StaticResource SuccessColor}"/>
+                                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Balance" Binding="{Binding Balance, StringFormat=C}" Width="150">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
+                                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Aging" Binding="{Binding Aging}" Width="120"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Page>
+

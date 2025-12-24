@@ -1,0 +1,1226 @@
+-- ============================================================
+-- Real Estate Management System Database Schema V3 (SQL Server)
+-- Consolidated from V2 + AI version, tuned for manageability
+-- Notes: No index creation per request. Designed for WPF backend.
+-- ============================================================
+
+-- =========================
+-- SECTION 1: DATABASE SETUP
+-- =========================
+IF NOT EXISTS (SELECT 1 FROM sys.databases WHERE name = 'RealEstateDB')
+BEGIN
+    CREATE DATABASE RealEstateDB;
+    PRINT 'Database RealEstateDB created.';
+END
+ELSE
+BEGIN
+    PRINT 'Database RealEstateDB already exists.';
+END;
+GO
+
+USE RealEstateDB;
+GO
+
+-- =========================
+-- SECTION 2: CORE ENTITIES
+-- =========================
+CREATE TABLE Users (
+    UserId INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    Role NVARCHAR(50) NOT NULL CHECK (Role IN ('Admin','Accountant','SalesOfficer','Agent','Partner','Viewer')),
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE(),
+    IsActive BIT DEFAULT 1
+);
+GO
+
+CREATE TABLE Parties (
+    PartyId INT IDENTITY(1,1) PRIMARY KEY,
+    Type NVARCHAR(50) NOT NULL CHECK (Type IN ('Buyer','Seller','Agent','Partner')),
+    Name NVARCHAR(100) NOT NULL,
+    CNIC NVARCHAR(20) NULL,
+    NTN NVARCHAR(50) NULL,
+    ContactPhone NVARCHAR(20) NULL,
+    ContactEmail NVARCHAR(100) NULL,
+    Address NVARCHAR(500) NULL,
+    Status NVARCHAR(50) DEFAULT 'Active' CHECK (Status IN ('Active','Inactive','Blocked')),
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE()
+);
+GO
+
+-- =========================
+-- SECTION 3: PROJECT & PLOT
+-- =========================
+CREATE TABLE Projects (
+    ProjectId INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(200) NOT NULL,
+    Location NVARCHAR(200) NOT NULL,
+    TotalAreaMarla DECIMAL(10,2) NOT NULL,
+    Status NVARCHAR(50) DEFAULT 'Planning' CHECK (Status IN ('Planning','Ongoing','Completed','OnHold')),
+    StartDate DATE NULL,
+    EndDate DATE NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE Plots (
+    PlotId INT IDENTITY(1,1) PRIMARY KEY,
+    ProjectId INT NOT NULL,
+    PlotNo NVARCHAR(50) NOT NULL,
+    SizeMarla DECIMAL(10,2) NOT NULL,
+    Block NVARCHAR(50) NULL,
+    Phase NVARCHAR(50) NULL,
+    Facing NVARCHAR(50) NULL,
+    Price DECIMAL(18,2) NOT NULL,
+    Status NVARCHAR(50) DEFAULT 'Available' CHECK (Status IN ('Available','Sold','Blocked','Disputed','InTransfer')),
+    SellerId INT NULL,
+    BuyerId INT NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_Plots_Projects FOREIGN KEY (ProjectId) REFERENCES Projects(ProjectId) ON DELETE CASCADE,
+    CONSTRAINT FK_Plots_Seller FOREIGN KEY (SellerId) REFERENCES Parties(PartyId),
+    CONSTRAINT FK_Plots_Buyer FOREIGN KEY (BuyerId) REFERENCES Parties(PartyId),
+    CONSTRAINT UQ_Plot_Project_PlotNo UNIQUE (ProjectId, PlotNo)
+);
+GO
+
+CREATE TABLE PlotHistory (
+    HistoryId INT IDENTITY(1,1) PRIMARY KEY,
+    PlotId INT NOT NULL,
+    PreviousBuyerId INT NULL,
+    NewBuyerId INT NULL,
+    TransferDate DATE NOT NULL,
+    TransferType NVARCHAR(50) NOT NULL CHECK (TransferType IN ('Sale','Transfer','Return')),
+    Amount DECIMAL(18,2) NULL,
+    Remarks NVARCHAR(500) NULL,
+    CreatedBy INT NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_PlotHistory_Plot FOREIGN KEY (PlotId) REFERENCES Plots(PlotId) ON DELETE CASCADE,
+    CONSTRAINT FK_PlotHistory_PreviousBuyer FOREIGN KEY (PreviousBuyerId) REFERENCES Parties(PartyId),
+    CONSTRAINT FK_PlotHistory_NewBuyer FOREIGN KEY (NewBuyerId) REFERENCES Parties(PartyId),
+    CONSTRAINT FK_PlotHistory_CreatedBy FOREIGN KEY (CreatedBy) REFERENCES Users(UserId)
+);
+GO
+
+-- ===============================
+-- SECTION 4: SALES & RECEIVABLES
+-- ===============================
+CREATE TABLE Sales (
+    SaleId INT IDENTITY(1,1) PRIMARY KEY,
+    ProjectId INT NOT NULL,
+    PlotId INT NOT NULL,
+    BuyerId INT NOT NULL,
+    SellerId INT NOT NULL,
+    SalePrice DECIMAL(18,2) NOT NULL,
+    SaleDate DATE NOT NULL,
+    DownPayment DECIMAL(18,2) NOT NULL DEFAULT 0,
+    PaymentPlanId INT NULL,
+    AgentId INT NULL,
+    CommissionPercent DECIMAL(5,2) NULL,
+    Status NVARCHAR(50) DEFAULT 'Pending' CHECK (Status IN ('Pending','Completed','Cancelled')),
+    CreatedBy INT NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_Sales_Projects FOREIGN KEY (ProjectId) REFERENCES Projects(ProjectId),
+    CONSTRAINT FK_Sales_Plots FOREIGN KEY (PlotId) REFERENCES Plots(PlotId),
+    CONSTRAINT FK_Sales_Buyer FOREIGN KEY (BuyerId) REFERENCES Parties(PartyId),
+    CONSTRAINT FK_Sales_Seller FOREIGN KEY (SellerId) REFERENCES Parties(PartyId),
+    CONSTRAINT FK_Sales_Agent FOREIGN KEY (AgentId) REFERENCES Parties(PartyId),
+    CONSTRAINT FK_Sales_CreatedBy FOREIGN KEY (CreatedBy) REFERENCES Users(UserId)
+);
+GO
+
+CREATE TABLE SaleBuyers (
+    SaleBuyerId INT IDENTITY(1,1) PRIMARY KEY,
+    SaleId INT NOT NULL,
+    BuyerId INT NOT NULL,
+    OwnershipPercent DECIMAL(5,2) NOT NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+
+    CONSTRAINT FK_SaleBuyers_Sales
+        FOREIGN KEY (SaleId)
+        REFERENCES Sales(SaleId)
+        ON DELETE CASCADE,
+
+    CONSTRAINT FK_SaleBuyers_Buyer
+        FOREIGN KEY (BuyerId)
+        REFERENCES Parties(PartyId),
+
+    CONSTRAINT UQ_SaleBuyers_Sale_Buyer
+        UNIQUE (SaleId, BuyerId),
+
+    CONSTRAINT CHK_OwnershipPercent
+        CHECK (OwnershipPercent > 0 AND OwnershipPercent <= 100)
+);
+GO
+
+CREATE TABLE PaymentPlans (
+    PaymentPlanId INT IDENTITY(1,1) PRIMARY KEY,
+    SaleId INT NOT NULL UNIQUE,
+    PlanType NVARCHAR(50) NOT NULL CHECK (PlanType IN ('Monthly','Quarterly','BiAnnual','Custom')),
+    TotalAmount DECIMAL(18,2) NOT NULL,
+    DownPayment DECIMAL(18,2) NOT NULL DEFAULT 0,
+    NumberOfInstallments INT NOT NULL,
+    InstallmentAmount DECIMAL(18,2) NOT NULL,
+    StartDate DATE NOT NULL,
+    Status NVARCHAR(50) DEFAULT 'Active' CHECK (Status IN ('Active','Completed','Cancelled')),
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_PaymentPlans_Sales FOREIGN KEY (SaleId) REFERENCES Sales(SaleId) ON DELETE CASCADE
+);
+GO
+
+ALTER TABLE Sales
+ADD CONSTRAINT FK_Sales_PaymentPlans FOREIGN KEY (PaymentPlanId) REFERENCES PaymentPlans(PaymentPlanId);
+GO
+
+CREATE TABLE Installments (
+    InstallmentId INT IDENTITY(1,1) PRIMARY KEY,
+    PaymentPlanId INT NOT NULL,
+    InstallmentNo INT NOT NULL,
+    DueDate DATE NOT NULL,
+    Amount DECIMAL(18,2) NOT NULL,
+    Status NVARCHAR(50) DEFAULT 'Due' CHECK (Status IN ('Due','Paid','Overdue','Partial')),
+    PaidAmount DECIMAL(18,2) DEFAULT 0,
+    TransactionId INT NULL,
+    PaidDate DATE NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_Installments_PaymentPlans FOREIGN KEY (PaymentPlanId) REFERENCES PaymentPlans(PaymentPlanId) ON DELETE CASCADE,
+    CONSTRAINT UQ_Installment_Plan_No UNIQUE (PaymentPlanId, InstallmentNo)
+);
+GO
+
+-- =========================
+-- SECTION 5: FINANCIAL CORE
+-- =========================
+CREATE TABLE BankAccounts (
+    AccountId INT IDENTITY(1,1) PRIMARY KEY,
+    AccountName NVARCHAR(200) NOT NULL,
+    AccountNumber NVARCHAR(50) NOT NULL,
+    BankName NVARCHAR(100) NOT NULL,
+    AccountType NVARCHAR(50) NOT NULL CHECK (AccountType IN ('Sales','Operations','Collections','Investments','Other')),
+    Balance DECIMAL(18,2) DEFAULT 0,
+    IsActive BIT DEFAULT 1,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE Transactions (
+    TransactionId INT IDENTITY(1,1) PRIMARY KEY,
+    Date DATE NOT NULL,
+    Amount DECIMAL(18,2) NOT NULL,
+    Type NVARCHAR(50) NOT NULL CHECK (Type IN ('Payment','Withdrawal','Refund','Commission','SellerPayment','PartnerWithdrawal','Other')),
+    Reference NVARCHAR(200) NULL,
+    FromPartyId INT NULL,
+    ToPartyId INT NULL,
+    SaleId INT NULL,
+    PlotId INT NULL,
+    AccountId INT NULL,
+    InstallmentId INT NULL,
+    Method NVARCHAR(50) NULL CHECK (Method IN ('Cash','BankTransfer','Cheque','Online','Other')),
+    Description NVARCHAR(500) NULL,
+    IsReconciled BIT DEFAULT 0,
+    ReconciledDate DATE NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_Transactions_FromParty FOREIGN KEY (FromPartyId) REFERENCES Parties(PartyId),
+    CONSTRAINT FK_Transactions_ToParty FOREIGN KEY (ToPartyId) REFERENCES Parties(PartyId),
+    CONSTRAINT FK_Transactions_Sales FOREIGN KEY (SaleId) REFERENCES Sales(SaleId),
+    CONSTRAINT FK_Transactions_Plots FOREIGN KEY (PlotId) REFERENCES Plots(PlotId),
+    CONSTRAINT FK_Transactions_Accounts FOREIGN KEY (AccountId) REFERENCES BankAccounts(AccountId),
+    CONSTRAINT FK_Transactions_Installments FOREIGN KEY (InstallmentId) REFERENCES Installments(InstallmentId)
+);
+GO
+
+ALTER TABLE Installments
+ADD CONSTRAINT FK_Installments_Transactions FOREIGN KEY (TransactionId) REFERENCES Transactions(TransactionId);
+GO
+
+CREATE TABLE Expenses (
+    ExpenseId INT IDENTITY(1,1) PRIMARY KEY,
+    ProjectId INT NULL,
+    ExpenseDate DATE NOT NULL,
+    ExpenseType NVARCHAR(100) NOT NULL,
+    Amount DECIMAL(18,2) NOT NULL,
+    Description NVARCHAR(500) NULL,
+    AccountId INT NULL,
+    TransactionId INT NULL,
+    CreatedBy INT NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_Expenses_Project FOREIGN KEY (ProjectId) REFERENCES Projects(ProjectId),
+    CONSTRAINT FK_Expenses_Account FOREIGN KEY (AccountId) REFERENCES BankAccounts(AccountId),
+    CONSTRAINT FK_Expenses_Transaction FOREIGN KEY (TransactionId) REFERENCES Transactions(TransactionId),
+    CONSTRAINT FK_Expenses_CreatedBy FOREIGN KEY (CreatedBy) REFERENCES Users(UserId)
+);
+GO
+
+-- =========================
+-- SECTION 6: COMMISSIONS
+-- =========================
+CREATE TABLE Commissions (
+    CommissionId INT IDENTITY(1,1) PRIMARY KEY,
+    SaleId INT NOT NULL,
+    AgentId INT NOT NULL,
+    CommissionPercent DECIMAL(5,2) NOT NULL,
+    CommissionAmount DECIMAL(18,2) NOT NULL,
+    Status NVARCHAR(50) DEFAULT 'Pending' CHECK (Status IN ('Pending','Approved','Paid','Cancelled')),
+    PaymentVoucherId INT NULL,
+    ApprovedBy INT NULL,
+    ApprovedDate DATE NULL,
+    PaidDate DATE NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_Commissions_Sales FOREIGN KEY (SaleId) REFERENCES Sales(SaleId) ON DELETE CASCADE,
+    CONSTRAINT FK_Commissions_Agent FOREIGN KEY (AgentId) REFERENCES Parties(PartyId),
+    CONSTRAINT FK_Commissions_ApprovedBy FOREIGN KEY (ApprovedBy) REFERENCES Users(UserId),
+    CONSTRAINT FK_Commissions_PaymentVoucher FOREIGN KEY (PaymentVoucherId) REFERENCES Transactions(TransactionId)
+);
+GO
+
+-- =========================
+-- SECTION 7: PARTNERS & ROI
+-- =========================
+CREATE TABLE PartnerInvestments (
+    PartnerInvestmentId INT IDENTITY(1,1) PRIMARY KEY,
+    PartnerId INT NOT NULL,
+    ProjectId INT NOT NULL,
+    CapitalInjected DECIMAL(18,2) NOT NULL DEFAULT 0,
+    ProfitCredited DECIMAL(18,2) NOT NULL DEFAULT 0,
+    Withdrawals DECIMAL(18,2) NOT NULL DEFAULT 0,
+    SharePercent DECIMAL(5,2) NOT NULL,
+    JoiningDate DATE NOT NULL,
+    Status NVARCHAR(50) DEFAULT 'Active' CHECK (Status IN ('Active','Inactive','Terminated')),
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_PartnerInvestments_Partner FOREIGN KEY (PartnerId) REFERENCES Parties(PartyId),
+    CONSTRAINT FK_PartnerInvestments_Project FOREIGN KEY (ProjectId) REFERENCES Projects(ProjectId) ON DELETE CASCADE,
+    CONSTRAINT CHK_SharePercent CHECK (SharePercent BETWEEN 0 AND 100)
+);
+GO
+
+CREATE TABLE CapitalInjections (
+    InjectionId INT IDENTITY(1,1) PRIMARY KEY,
+    PartnerInvestmentId INT NOT NULL,
+    Amount DECIMAL(18,2) NOT NULL,
+    InjectionDate DATE NOT NULL,
+    TransactionId INT NULL,
+    Description NVARCHAR(500) NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_CapitalInjections_PartnerInvestment FOREIGN KEY (PartnerInvestmentId) REFERENCES PartnerInvestments(PartnerInvestmentId) ON DELETE CASCADE,
+    CONSTRAINT FK_CapitalInjections_Transaction FOREIGN KEY (TransactionId) REFERENCES Transactions(TransactionId)
+);
+GO
+
+CREATE TABLE ProfitDistributions (
+    DistributionId INT IDENTITY(1,1) PRIMARY KEY,
+    ProjectId INT NOT NULL,
+    DistributionDate DATE NOT NULL,
+    TotalProfit DECIMAL(18,2) NOT NULL,
+    Status NVARCHAR(50) DEFAULT 'Pending' CHECK (Status IN ('Pending','Distributed','Cancelled')),
+    CreatedBy INT NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_ProfitDistributions_Project FOREIGN KEY (ProjectId) REFERENCES Projects(ProjectId) ON DELETE CASCADE,
+    CONSTRAINT FK_ProfitDistributions_CreatedBy FOREIGN KEY (CreatedBy) REFERENCES Users(UserId)
+);
+GO
+
+CREATE TABLE ProfitDistributionDetails (
+    DistributionDetailId INT IDENTITY(1,1) PRIMARY KEY,
+    DistributionId INT NOT NULL,
+    PartnerInvestmentId INT NOT NULL,
+    SharePercent DECIMAL(5,2) NOT NULL,
+    ProfitAmount DECIMAL(18,2) NOT NULL,
+    TransactionId INT NULL,
+    Status NVARCHAR(50) DEFAULT 'Pending' CHECK (Status IN ('Pending','Credited','Paid')),
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_ProfitDistributionDetails_Distribution FOREIGN KEY (DistributionId) REFERENCES ProfitDistributions(DistributionId) ON DELETE CASCADE,
+    CONSTRAINT FK_ProfitDistributionDetails_PartnerInvestment FOREIGN KEY (PartnerInvestmentId) REFERENCES PartnerInvestments(PartnerInvestmentId),
+    CONSTRAINT FK_ProfitDistributionDetails_Transaction FOREIGN KEY (TransactionId) REFERENCES Transactions(TransactionId)
+);
+GO
+
+-- =========================
+-- SECTION 8: PAYROLL
+-- =========================
+CREATE TABLE Employees (
+    EmployeeId INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    CNIC NVARCHAR(20) NULL,
+    ContactPhone NVARCHAR(20) NULL,
+    ContactEmail NVARCHAR(100) NULL,
+    Address NVARCHAR(500) NULL,
+    Designation NVARCHAR(100) NULL,
+    Department NVARCHAR(100) NULL,
+    JoiningDate DATE NOT NULL,
+    MonthlySalary DECIMAL(18,2) NOT NULL,
+    Status NVARCHAR(50) DEFAULT 'Active' CHECK (Status IN ('Active','Inactive','Terminated')),
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE Payroll (
+    PayrollId INT IDENTITY(1,1) PRIMARY KEY,
+    EmployeeId INT NOT NULL,
+    PayPeriodStart DATE NOT NULL,
+    PayPeriodEnd DATE NOT NULL,
+    BasicSalary DECIMAL(18,2) NOT NULL,
+    Allowances DECIMAL(18,2) DEFAULT 0,
+    Deductions DECIMAL(18,2) DEFAULT 0,
+    NetSalary DECIMAL(18,2) NOT NULL,
+    Status NVARCHAR(50) DEFAULT 'Pending' CHECK (Status IN ('Pending','Approved','Paid','Cancelled')),
+    PaymentDate DATE NULL,
+    TransactionId INT NULL,
+    CreatedBy INT NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    UpdatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_Payroll_Employee FOREIGN KEY (EmployeeId) REFERENCES Employees(EmployeeId),
+    CONSTRAINT FK_Payroll_Transaction FOREIGN KEY (TransactionId) REFERENCES Transactions(TransactionId),
+    CONSTRAINT FK_Payroll_CreatedBy FOREIGN KEY (CreatedBy) REFERENCES Users(UserId)
+);
+GO
+
+CREATE TABLE Attendance (
+    AttendanceId INT IDENTITY(1,1) PRIMARY KEY,
+    EmployeeId INT NOT NULL,
+    AttendanceDate DATE NOT NULL,
+    CheckInTime TIME NULL,
+    CheckOutTime TIME NULL,
+    Status NVARCHAR(50) DEFAULT 'Present' CHECK (Status IN ('Present','Absent','Leave','HalfDay')),
+    Remarks NVARCHAR(500) NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_Attendance_Employee FOREIGN KEY (EmployeeId) REFERENCES Employees(EmployeeId),
+    CONSTRAINT UQ_Attendance_Employee_Date UNIQUE (EmployeeId, AttendanceDate)
+);
+GO
+
+-- =================================
+-- SECTION 9: BANK STATEMENT IMPORT
+-- =================================
+CREATE TABLE BankStatementImports (
+    ImportId INT IDENTITY(1,1) PRIMARY KEY,
+    AccountId INT NOT NULL,
+    ImportDate DATETIME2 DEFAULT GETDATE(),
+    FileName NVARCHAR(255) NOT NULL,
+    TotalRecords INT NOT NULL,
+    MatchedRecords INT DEFAULT 0,
+    UnmatchedRecords INT DEFAULT 0,
+    Status NVARCHAR(50) DEFAULT 'Pending' CHECK (Status IN ('Pending','Processing','Completed','Failed')),
+    ImportedBy INT NULL,
+    Remarks NVARCHAR(500) NULL,
+    CONSTRAINT FK_BankStatementImports_Account FOREIGN KEY (AccountId) REFERENCES BankAccounts(AccountId),
+    CONSTRAINT FK_BankStatementImports_ImportedBy FOREIGN KEY (ImportedBy) REFERENCES Users(UserId)
+);
+GO
+
+CREATE TABLE BankStatementLines (
+    StatementLineId INT IDENTITY(1,1) PRIMARY KEY,
+    ImportId INT NOT NULL,
+    TransactionDate DATE NOT NULL,
+    Description NVARCHAR(500) NULL,
+    DebitAmount DECIMAL(18,2) DEFAULT 0,
+    CreditAmount DECIMAL(18,2) DEFAULT 0,
+    Balance DECIMAL(18,2) NULL,
+    ReferenceNumber NVARCHAR(100) NULL,
+    IsMatched BIT DEFAULT 0,
+    MatchedTransactionId INT NULL,
+    CreatedAt DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT FK_BankStatementLines_Import FOREIGN KEY (ImportId) REFERENCES BankStatementImports(ImportId) ON DELETE CASCADE,
+    CONSTRAINT FK_BankStatementLines_MatchedTransaction FOREIGN KEY (MatchedTransactionId) REFERENCES Transactions(TransactionId)
+);
+GO
+
+-- ================================
+-- SECTION 10: FUNCTIONS (UTILITY)
+-- ================================
+CREATE FUNCTION fn_GetReceivablesAgingBucket(@DueDate DATE)
+RETURNS NVARCHAR(50)
+AS
+BEGIN
+    DECLARE @DaysOverdue INT = DATEDIFF(DAY, @DueDate, GETDATE());
+    RETURN CASE 
+        WHEN @DaysOverdue <= 0 THEN 'Not Due'
+        WHEN @DaysOverdue <= 30 THEN '0-30 Days'
+        WHEN @DaysOverdue <= 60 THEN '31-60 Days'
+        WHEN @DaysOverdue <= 90 THEN '61-90 Days'
+        ELSE '90+ Days'
+    END;
+END;
+GO
+
+CREATE FUNCTION fn_GetBuyerOutstandingBalance(@BuyerId INT)
+RETURNS DECIMAL(18,2)
+AS
+BEGIN
+    DECLARE @Balance DECIMAL(18,2);
+    SELECT @Balance = ISNULL(SUM(inst.Amount - inst.PaidAmount), 0)
+    FROM Installments inst
+    INNER JOIN PaymentPlans pp ON inst.PaymentPlanId = pp.PaymentPlanId
+    INNER JOIN Sales s ON pp.SaleId = s.SaleId
+    WHERE s.BuyerId = @BuyerId AND inst.Status IN ('Due','Overdue','Partial');
+    RETURN ISNULL(@Balance, 0);
+END;
+GO
+
+CREATE FUNCTION fn_GetProjectTotalSales(@ProjectId INT)
+RETURNS DECIMAL(18,2)
+AS
+BEGIN
+    DECLARE @TotalSales DECIMAL(18,2);
+    SELECT @TotalSales = ISNULL(SUM(SalePrice), 0) FROM Sales WHERE ProjectId = @ProjectId AND Status = 'Completed';
+    RETURN ISNULL(@TotalSales, 0);
+END;
+GO
+
+CREATE FUNCTION fn_GetProjectTotalExpenses(@ProjectId INT)
+RETURNS DECIMAL(18,2)
+AS
+BEGIN
+    DECLARE @TotalExpenses DECIMAL(18,2);
+    SELECT @TotalExpenses = ISNULL(SUM(Amount), 0) FROM Expenses WHERE ProjectId = @ProjectId;
+    RETURN ISNULL(@TotalExpenses, 0);
+END;
+GO
+
+CREATE FUNCTION fn_GetProjectNetProfit(@ProjectId INT)
+RETURNS DECIMAL(18,2)
+AS
+BEGIN
+    RETURN ISNULL(dbo.fn_GetProjectTotalSales(@ProjectId) - dbo.fn_GetProjectTotalExpenses(@ProjectId), 0);
+END;
+GO
+
+CREATE FUNCTION fn_GetAgentTotalCommission(@AgentId INT)
+RETURNS DECIMAL(18,2)
+AS
+BEGIN
+    DECLARE @Total DECIMAL(18,2);
+    SELECT @Total = ISNULL(SUM(CommissionAmount), 0) FROM Commissions WHERE AgentId = @AgentId;
+    RETURN ISNULL(@Total, 0);
+END;
+GO
+
+CREATE FUNCTION fn_GetAgentPendingCommission(@AgentId INT)
+RETURNS DECIMAL(18,2)
+AS
+BEGIN
+    DECLARE @Pending DECIMAL(18,2);
+    SELECT @Pending = ISNULL(SUM(CommissionAmount), 0) FROM Commissions WHERE AgentId = @AgentId AND Status = 'Pending';
+    RETURN ISNULL(@Pending, 0);
+END;
+GO
+
+CREATE FUNCTION fn_GetPartnerRunningBalance(@PartnerId INT, @ProjectId INT)
+RETURNS DECIMAL(18,2)
+AS
+BEGIN
+    DECLARE @Bal DECIMAL(18,2);
+    SELECT @Bal = (CapitalInjected + ProfitCredited - Withdrawals)
+    FROM PartnerInvestments WHERE PartnerId = @PartnerId AND ProjectId = @ProjectId;
+    RETURN ISNULL(@Bal, 0);
+END;
+GO
+
+-- =======================================
+-- SECTION 11: STORED PROCEDURES (WORKFLOWS)
+-- =======================================
+CREATE PROCEDURE sp_CreatePaymentPlan
+    @SaleId INT,
+    @PlanType NVARCHAR(50),
+    @TotalAmount DECIMAL(18,2),
+    @DownPayment DECIMAL(18,2),
+    @NumberOfInstallments INT,
+    @StartDate DATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @InstallmentAmount DECIMAL(18,2);
+    DECLARE @PaymentPlanId INT;
+    DECLARE @Counter INT = 1;
+    DECLARE @DueDate DATE;
+
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        IF @NumberOfInstallments <= 0 THROW 50001, 'Number of installments must be greater than 0', 1;
+        IF @TotalAmount <= @DownPayment THROW 50002, 'Total amount must be greater than down payment', 1;
+
+        SET @InstallmentAmount = (@TotalAmount - @DownPayment) / @NumberOfInstallments;
+
+        INSERT INTO PaymentPlans (SaleId, PlanType, TotalAmount, DownPayment, NumberOfInstallments, InstallmentAmount, StartDate)
+        VALUES (@SaleId, @PlanType, @TotalAmount, @DownPayment, @NumberOfInstallments, @InstallmentAmount, @StartDate);
+
+        SET @PaymentPlanId = SCOPE_IDENTITY();
+        UPDATE Sales SET PaymentPlanId = @PaymentPlanId WHERE SaleId = @SaleId;
+
+        SET @DueDate = @StartDate;
+        WHILE @Counter <= @NumberOfInstallments
+        BEGIN
+            IF @PlanType = 'Monthly' SET @DueDate = DATEADD(MONTH, @Counter, @StartDate);
+            ELSE IF @PlanType = 'Quarterly' SET @DueDate = DATEADD(MONTH, @Counter * 3, @StartDate);
+            ELSE IF @PlanType = 'BiAnnual' SET @DueDate = DATEADD(MONTH, @Counter * 6, @StartDate);
+            ELSE SET @DueDate = DATEADD(MONTH, @Counter, @StartDate);
+
+            INSERT INTO Installments (PaymentPlanId, InstallmentNo, DueDate, Amount, Status)
+            VALUES (@PaymentPlanId, @Counter, @DueDate, @InstallmentAmount, 'Due');
+            SET @Counter += 1;
+        END
+
+        COMMIT TRANSACTION;
+        SELECT @PaymentPlanId AS PaymentPlanId, 'Payment plan created successfully' AS Message;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+
+CREATE PROCEDURE sp_RecordPayment
+    @InstallmentId INT,
+    @Amount DECIMAL(18,2),
+    @PaymentDate DATE,
+    @AccountId INT,
+    @Method NVARCHAR(50),
+    @Description NVARCHAR(500) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @SaleId INT;
+    DECLARE @BuyerId INT;
+    DECLARE @TransactionId INT;
+    DECLARE @InstallmentAmount DECIMAL(18,2);
+    DECLARE @CurrentPaidAmount DECIMAL(18,2);
+
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        SELECT @SaleId = s.SaleId, @BuyerId = s.BuyerId,
+               @InstallmentAmount = inst.Amount, @CurrentPaidAmount = inst.PaidAmount
+        FROM Installments inst
+        INNER JOIN PaymentPlans pp ON inst.PaymentPlanId = pp.PaymentPlanId
+        INNER JOIN Sales s ON pp.SaleId = s.SaleId
+        WHERE inst.InstallmentId = @InstallmentId;
+
+        IF @SaleId IS NULL THROW 50003, 'Installment not found', 1;
+        IF @Amount <= 0 THROW 50004, 'Payment amount must be greater than 0', 1;
+
+        INSERT INTO Transactions (Date, Amount, Type, Reference, ToPartyId, SaleId, AccountId, InstallmentId, Method, Description)
+        VALUES (@PaymentDate, @Amount, 'Payment',
+                'Installment Payment - Installment #' + CAST((SELECT InstallmentNo FROM Installments WHERE InstallmentId = @InstallmentId) AS NVARCHAR),
+                @BuyerId, @SaleId, @AccountId, @InstallmentId, @Method, @Description);
+
+        SET @TransactionId = SCOPE_IDENTITY();
+
+        UPDATE Installments
+        SET PaidAmount = PaidAmount + @Amount,
+            Status = CASE 
+                WHEN (PaidAmount + @Amount) >= Amount THEN 'Paid'
+                WHEN (PaidAmount + @Amount) > 0 THEN 'Partial'
+                ELSE 'Due'
+            END,
+            PaidDate = CASE WHEN (PaidAmount + @Amount) >= Amount THEN @PaymentDate ELSE PaidDate END,
+            TransactionId = @TransactionId,
+            UpdatedAt = GETDATE()
+        WHERE InstallmentId = @InstallmentId;
+
+        COMMIT TRANSACTION;
+        SELECT @TransactionId AS TransactionId, 'Payment recorded successfully' AS Message;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+
+CREATE PROCEDURE sp_DistributeProfit
+    @ProjectId INT,
+    @DistributionDate DATE,
+    @TotalProfit DECIMAL(18,2),
+    @CreatedBy INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @DistributionId INT;
+    DECLARE @PartnerInvestmentId INT;
+    DECLARE @SharePercent DECIMAL(5,2);
+    DECLARE @ProfitAmount DECIMAL(18,2);
+
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        IF @TotalProfit <= 0 THROW 50005, 'Total profit must be greater than 0', 1;
+
+        INSERT INTO ProfitDistributions (ProjectId, DistributionDate, TotalProfit, CreatedBy, Status)
+        VALUES (@ProjectId, @DistributionDate, @TotalProfit, @CreatedBy, 'Pending');
+
+        SET @DistributionId = SCOPE_IDENTITY();
+
+        DECLARE partner_cursor CURSOR FOR
+        SELECT PartnerInvestmentId, SharePercent
+        FROM PartnerInvestments
+        WHERE ProjectId = @ProjectId AND Status = 'Active';
+
+        OPEN partner_cursor;
+        FETCH NEXT FROM partner_cursor INTO @PartnerInvestmentId, @SharePercent;
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+            SET @ProfitAmount = @TotalProfit * @SharePercent / 100;
+            INSERT INTO ProfitDistributionDetails (DistributionId, PartnerInvestmentId, SharePercent, ProfitAmount, Status)
+            VALUES (@DistributionId, @PartnerInvestmentId, @SharePercent, @ProfitAmount, 'Pending');
+            FETCH NEXT FROM partner_cursor INTO @PartnerInvestmentId, @SharePercent;
+        END
+        CLOSE partner_cursor;
+        DEALLOCATE partner_cursor;
+
+        UPDATE ProfitDistributions SET Status = 'Distributed' WHERE DistributionId = @DistributionId;
+
+        COMMIT TRANSACTION;
+        SELECT @DistributionId AS DistributionId, 'Profit distributed successfully' AS Message;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+
+CREATE PROCEDURE sp_MarkPlotSold
+    @PlotId INT,
+    @BuyerId INT,
+    @SalePrice DECIMAL(18,2),
+    @SaleDate DATE,
+    @DownPayment DECIMAL(18,2),
+    @SellerId INT,
+    @AgentId INT = NULL,
+    @CommissionPercent DECIMAL(5,2) = NULL,
+    @CreatedBy INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @SaleId INT;
+    DECLARE @ProjectId INT;
+
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        SELECT @ProjectId = ProjectId FROM Plots WHERE PlotId = @PlotId;
+        IF @ProjectId IS NULL THROW 50006, 'Plot not found', 1;
+        IF EXISTS (SELECT 1 FROM Plots WHERE PlotId = @PlotId AND Status = 'Sold') THROW 50007, 'Plot already sold', 1;
+
+        INSERT INTO Sales (ProjectId, PlotId, BuyerId, SellerId, SalePrice, SaleDate, DownPayment, AgentId, CommissionPercent, CreatedBy, Status)
+        VALUES (@ProjectId, @PlotId, @BuyerId, @SellerId, @SalePrice, @SaleDate, @DownPayment, @AgentId, @CommissionPercent, @CreatedBy, 'Pending');
+
+        SET @SaleId = SCOPE_IDENTITY();
+        UPDATE Plots SET Status = 'Sold', BuyerId = @BuyerId, UpdatedAt = GETDATE() WHERE PlotId = @PlotId;
+
+        COMMIT TRANSACTION;
+        SELECT @SaleId AS SaleId, 'Plot marked as sold successfully' AS Message;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+
+CREATE PROCEDURE sp_AddCapitalInjection
+    @PartnerInvestmentId INT,
+    @Amount DECIMAL(18,2),
+    @InjectionDate DATE,
+    @Description NVARCHAR(500) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @TransactionId INT;
+
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        IF @Amount <= 0 THROW 50008, 'Amount must be greater than 0', 1;
+
+        INSERT INTO Transactions (Date, Amount, Type, Description)
+        VALUES (@InjectionDate, @Amount, 'Other', ISNULL(@Description, 'Capital Injection'));
+
+        SET @TransactionId = SCOPE_IDENTITY();
+
+        INSERT INTO CapitalInjections (PartnerInvestmentId, Amount, InjectionDate, TransactionId, Description)
+        VALUES (@PartnerInvestmentId, @Amount, @InjectionDate, @TransactionId, @Description);
+
+        COMMIT TRANSACTION;
+        SELECT @TransactionId AS TransactionId, 'Capital injection recorded successfully' AS Message;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+
+CREATE PROCEDURE sp_RecordSellerPayment
+    @SellerId INT,
+    @SaleId INT,
+    @Amount DECIMAL(18,2),
+    @PaymentDate DATE,
+    @AccountId INT,
+    @Method NVARCHAR(50),
+    @Description NVARCHAR(500) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @TransactionId INT;
+
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        IF @Amount <= 0 THROW 50009, 'Payment amount must be greater than 0', 1;
+
+        INSERT INTO Transactions (Date, Amount, Type, Reference, ToPartyId, SaleId, AccountId, Method, Description)
+        VALUES (@PaymentDate, @Amount, 'SellerPayment', 'Seller Payment - Sale #' + CAST(@SaleId AS NVARCHAR), @SellerId, @SaleId, @AccountId, @Method, @Description);
+
+        SET @TransactionId = SCOPE_IDENTITY();
+
+        COMMIT TRANSACTION;
+        SELECT @TransactionId AS TransactionId, 'Seller payment recorded successfully' AS Message;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+
+CREATE PROCEDURE sp_RecordCommissionPayment
+    @CommissionId INT,
+    @PaymentDate DATE,
+    @AccountId INT,
+    @Method NVARCHAR(50),
+    @ApprovedBy INT,
+    @Description NVARCHAR(500) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @TransactionId INT;
+    DECLARE @AgentId INT;
+    DECLARE @Amount DECIMAL(18,2);
+
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        SELECT @AgentId = AgentId, @Amount = CommissionAmount FROM Commissions WHERE CommissionId = @CommissionId;
+        IF @AgentId IS NULL THROW 50010, 'Commission not found', 1;
+
+        INSERT INTO Transactions (Date, Amount, Type, Reference, ToPartyId, AccountId, Method, Description)
+        VALUES (@PaymentDate, @Amount, 'Commission', 'Commission Payment - Commission #' + CAST(@CommissionId AS NVARCHAR), @AgentId, @AccountId, @Method, @Description);
+
+        SET @TransactionId = SCOPE_IDENTITY();
+
+        UPDATE Commissions
+        SET Status = 'Paid', PaymentVoucherId = @TransactionId, ApprovedBy = @ApprovedBy,
+            ApprovedDate = @PaymentDate, PaidDate = @PaymentDate, UpdatedAt = GETDATE()
+        WHERE CommissionId = @CommissionId;
+
+        COMMIT TRANSACTION;
+        SELECT @TransactionId AS TransactionId, 'Commission payment recorded successfully' AS Message;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+
+-- =========================
+-- SECTION 12: VIEWS
+-- =========================
+CREATE VIEW vw_SalesRegister AS
+SELECT 
+    s.SaleId,
+    p.Name AS ProjectName,
+    pl.PlotNo,
+    pl.SizeMarla,
+    pl.Block,
+    pl.Phase,
+    buyer.Name AS BuyerName,
+    buyer.CNIC AS BuyerCNIC,
+    buyer.ContactPhone AS BuyerPhone,
+    seller.Name AS SellerName,
+    s.SalePrice,
+    s.DownPayment,
+    s.SaleDate,
+    pp.PlanType,
+    pp.TotalAmount,
+    pp.NumberOfInstallments,
+    ISNULL(SUM(inst.PaidAmount), 0) AS TotalPaid,
+    (pp.TotalAmount - ISNULL(SUM(inst.PaidAmount), 0)) AS BalanceReceivable,
+    s.Status AS SaleStatus
+FROM Sales s
+INNER JOIN Projects p ON s.ProjectId = p.ProjectId
+INNER JOIN Plots pl ON s.PlotId = pl.PlotId
+INNER JOIN Parties buyer ON s.BuyerId = buyer.PartyId
+INNER JOIN Parties seller ON s.SellerId = seller.PartyId
+LEFT JOIN PaymentPlans pp ON s.PaymentPlanId = pp.PaymentPlanId
+LEFT JOIN Installments inst ON pp.PaymentPlanId = inst.PaymentPlanId
+GROUP BY s.SaleId, p.Name, pl.PlotNo, pl.SizeMarla, pl.Block, pl.Phase,
+    buyer.Name, buyer.CNIC, buyer.ContactPhone, seller.Name,
+    s.SalePrice, s.DownPayment, s.SaleDate, pp.PlanType, pp.TotalAmount,
+    pp.NumberOfInstallments, s.Status;
+GO
+
+CREATE VIEW vw_ReceivablesAging AS
+SELECT 
+    s.SaleId,
+    buyer.Name AS BuyerName,
+    buyer.CNIC AS BuyerCNIC,
+    p.Name AS ProjectName,
+    pl.PlotNo,
+    inst.InstallmentId,
+    inst.InstallmentNo,
+    inst.DueDate,
+    inst.Amount AS DueAmount,
+    inst.PaidAmount,
+    (inst.Amount - inst.PaidAmount) AS OutstandingAmount,
+    DATEDIFF(DAY, inst.DueDate, GETDATE()) AS DaysOverdue,
+    dbo.fn_GetReceivablesAgingBucket(inst.DueDate) AS AgingBucket
+FROM Installments inst
+INNER JOIN PaymentPlans pp ON inst.PaymentPlanId = pp.PaymentPlanId
+INNER JOIN Sales s ON pp.SaleId = s.SaleId
+INNER JOIN Parties buyer ON s.BuyerId = buyer.PartyId
+INNER JOIN Projects p ON s.ProjectId = p.ProjectId
+INNER JOIN Plots pl ON s.PlotId = pl.PlotId
+WHERE inst.Status IN ('Due','Overdue','Partial');
+GO
+
+CREATE VIEW vw_PlotStatusSummary AS
+SELECT 
+    p.ProjectId,
+    p.Name AS ProjectName,
+    COUNT(pl.PlotId) AS TotalPlots,
+    SUM(CASE WHEN pl.Status = 'Available' THEN 1 ELSE 0 END) AS AvailablePlots,
+    SUM(CASE WHEN pl.Status = 'Sold' THEN 1 ELSE 0 END) AS SoldPlots,
+    SUM(CASE WHEN pl.Status = 'Blocked' THEN 1 ELSE 0 END) AS BlockedPlots,
+    SUM(CASE WHEN pl.Status = 'Disputed' THEN 1 ELSE 0 END) AS DisputedPlots,
+    SUM(CASE WHEN pl.Status = 'InTransfer' THEN 1 ELSE 0 END) AS InTransferPlots,
+    SUM(CASE WHEN pl.Status = 'Available' THEN pl.Price ELSE 0 END) AS AvailableValue,
+    SUM(CASE WHEN pl.Status = 'Sold' THEN pl.Price ELSE 0 END) AS SoldValue
+FROM Projects p
+LEFT JOIN Plots pl ON p.ProjectId = pl.ProjectId
+GROUP BY p.ProjectId, p.Name;
+GO
+
+CREATE VIEW vw_CommissionSummary AS
+SELECT 
+    agent.PartyId AS AgentId,
+    agent.Name AS AgentName,
+    agent.CNIC AS AgentCNIC,
+    agent.ContactPhone AS AgentPhone,
+    COUNT(c.CommissionId) AS TotalCommissions,
+    dbo.fn_GetAgentTotalCommission(agent.PartyId) AS TotalCommissionEarned,
+    SUM(CASE WHEN c.Status = 'Paid' THEN c.CommissionAmount ELSE 0 END) AS CommissionPaid,
+    dbo.fn_GetAgentPendingCommission(agent.PartyId) AS CommissionPending,
+    SUM(CASE WHEN c.Status = 'Approved' THEN c.CommissionAmount ELSE 0 END) AS CommissionApproved
+FROM Parties agent
+LEFT JOIN Commissions c ON agent.PartyId = c.AgentId
+WHERE agent.Type = 'Agent'
+GROUP BY agent.PartyId, agent.Name, agent.CNIC, agent.ContactPhone;
+GO
+
+CREATE VIEW vw_PartnerInvestmentSummary AS
+SELECT 
+    partner.PartyId AS PartnerId,
+    partner.Name AS PartnerName,
+    partner.CNIC AS PartnerCNIC,
+    p.ProjectId,
+    p.Name AS ProjectName,
+    pi.SharePercent,
+    pi.CapitalInjected,
+    pi.ProfitCredited,
+    pi.Withdrawals,
+    dbo.fn_GetPartnerRunningBalance(partner.PartyId, p.ProjectId) AS RunningBalance,
+    pi.JoiningDate,
+    pi.Status
+FROM PartnerInvestments pi
+INNER JOIN Parties partner ON pi.PartnerId = partner.PartyId
+INNER JOIN Projects p ON pi.ProjectId = p.ProjectId;
+GO
+
+CREATE VIEW vw_BuyerLedger AS
+SELECT 
+    buyer.PartyId,
+    buyer.Name AS BuyerName,
+    buyer.CNIC,
+    buyer.ContactPhone,
+    buyer.ContactEmail,
+    t.TransactionId,
+    t.Date AS TransactionDate,
+    t.Amount,
+    t.Type AS TransactionType,
+    t.Description,
+    s.SaleId,
+    pl.PlotNo,
+    p.Name AS ProjectName,
+    CASE WHEN t.Type = 'Payment' THEN t.Amount ELSE 0 END AS Debit,
+    CASE WHEN t.Type = 'Refund' THEN t.Amount ELSE 0 END AS Credit
+FROM Parties buyer
+INNER JOIN Transactions t ON buyer.PartyId = t.ToPartyId OR buyer.PartyId = t.FromPartyId
+LEFT JOIN Sales s ON t.SaleId = s.SaleId
+LEFT JOIN Plots pl ON t.PlotId = pl.PlotId OR s.PlotId = pl.PlotId
+LEFT JOIN Projects p ON pl.ProjectId = p.ProjectId OR s.ProjectId = p.ProjectId
+WHERE buyer.Type = 'Buyer'
+ORDER BY buyer.PartyId, t.Date DESC;
+GO
+
+CREATE VIEW vw_SellerLedger AS
+SELECT 
+    seller.PartyId,
+    seller.Name AS SellerName,
+    seller.CNIC,
+    seller.ContactPhone,
+    seller.ContactEmail,
+    t.TransactionId,
+    t.Date AS TransactionDate,
+    t.Amount,
+    t.Type AS TransactionType,
+    t.Description,
+    s.SaleId,
+    pl.PlotNo,
+    p.Name AS ProjectName,
+    CASE WHEN t.Type = 'SellerPayment' THEN t.Amount ELSE 0 END AS Credit,
+    CASE WHEN t.Type = 'Refund' THEN t.Amount ELSE 0 END AS Debit
+FROM Parties seller
+INNER JOIN Transactions t ON seller.PartyId = t.ToPartyId OR seller.PartyId = t.FromPartyId
+LEFT JOIN Sales s ON t.SaleId = s.SaleId
+LEFT JOIN Plots pl ON t.PlotId = pl.PlotId OR s.PlotId = pl.PlotId
+LEFT JOIN Projects p ON pl.ProjectId = p.ProjectId OR s.ProjectId = p.ProjectId
+WHERE seller.Type = 'Seller'
+ORDER BY seller.PartyId, t.Date DESC;
+GO
+
+CREATE VIEW vw_MonthlyProgressReport AS
+SELECT 
+    YEAR(s.SaleDate) AS Year,
+    MONTH(s.SaleDate) AS Month,
+    p.ProjectId,
+    p.Name AS ProjectName,
+    COUNT(DISTINCT s.SaleId) AS TotalSales,
+    SUM(s.SalePrice) AS TotalSalesValue,
+    SUM(s.DownPayment) AS TotalDownPayments,
+    COUNT(DISTINCT pl.PlotId) AS NewPlotsOpened,
+    ISNULL(SUM(exp.Amount), 0) AS TotalExpenses,
+    (SUM(s.SalePrice) - ISNULL(SUM(exp.Amount), 0)) AS NetProfit
+FROM Sales s
+INNER JOIN Projects p ON s.ProjectId = p.ProjectId
+INNER JOIN Plots pl ON s.PlotId = pl.PlotId
+LEFT JOIN Expenses exp ON p.ProjectId = exp.ProjectId 
+    AND YEAR(exp.ExpenseDate) = YEAR(s.SaleDate) 
+    AND MONTH(exp.ExpenseDate) = MONTH(s.SaleDate)
+GROUP BY YEAR(s.SaleDate), MONTH(s.SaleDate), p.ProjectId, p.Name;
+GO
+
+-- =========================
+-- SECTION 13: TRIGGERS
+-- =========================
+-- UpdatedAt maintenance
+CREATE TRIGGER TR_Users_UpdatedAt ON Users AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE Users SET UpdatedAt = GETDATE() FROM Users u INNER JOIN inserted i ON u.UserId = i.UserId;
+END;
+GO
+CREATE TRIGGER TR_Parties_UpdatedAt ON Parties AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE Parties SET UpdatedAt = GETDATE() FROM Parties p INNER JOIN inserted i ON p.PartyId = i.PartyId;
+END;
+GO
+CREATE TRIGGER TR_Projects_UpdatedAt ON Projects AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE Projects SET UpdatedAt = GETDATE() FROM Projects p INNER JOIN inserted i ON p.ProjectId = i.ProjectId;
+END;
+GO
+CREATE TRIGGER TR_Plots_UpdatedAt ON Plots AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE Plots SET UpdatedAt = GETDATE() FROM Plots p INNER JOIN inserted i ON p.PlotId = i.PlotId;
+END;
+GO
+CREATE TRIGGER TR_Sales_UpdatedAt ON Sales AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE Sales SET UpdatedAt = GETDATE() FROM Sales s INNER JOIN inserted i ON s.SaleId = i.SaleId;
+END;
+GO
+CREATE TRIGGER TR_PaymentPlans_UpdatedAt ON PaymentPlans AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE PaymentPlans SET UpdatedAt = GETDATE() FROM PaymentPlans pp INNER JOIN inserted i ON pp.PaymentPlanId = i.PaymentPlanId;
+END;
+GO
+CREATE TRIGGER TR_Installments_UpdatedAt ON Installments AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE Installments SET UpdatedAt = GETDATE() FROM Installments inst INNER JOIN inserted i ON inst.InstallmentId = i.InstallmentId;
+END;
+GO
+CREATE TRIGGER TR_BankAccounts_UpdatedAt ON BankAccounts AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE BankAccounts SET UpdatedAt = GETDATE() FROM BankAccounts ba INNER JOIN inserted i ON ba.AccountId = i.AccountId;
+END;
+GO
+CREATE TRIGGER TR_Transactions_UpdatedAt ON Transactions AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE Transactions SET UpdatedAt = GETDATE() FROM Transactions t INNER JOIN inserted i ON t.TransactionId = i.TransactionId;
+END;
+GO
+CREATE TRIGGER TR_Commissions_UpdatedAt ON Commissions AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE Commissions SET UpdatedAt = GETDATE() FROM Commissions c INNER JOIN inserted i ON c.CommissionId = i.CommissionId;
+END;
+GO
+CREATE TRIGGER TR_PartnerInvestments_UpdatedAt ON PartnerInvestments AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE PartnerInvestments SET UpdatedAt = GETDATE() FROM PartnerInvestments pi INNER JOIN inserted i ON pi.PartnerInvestmentId = i.PartnerInvestmentId;
+END;
+GO
+CREATE TRIGGER TR_ProfitDistributions_UpdatedAt ON ProfitDistributions AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE ProfitDistributions SET UpdatedAt = GETDATE() FROM ProfitDistributions pd INNER JOIN inserted i ON pd.DistributionId = i.DistributionId;
+END;
+GO
+CREATE TRIGGER TR_Employees_UpdatedAt ON Employees AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE Employees SET UpdatedAt = GETDATE() FROM Employees e INNER JOIN inserted i ON e.EmployeeId = i.EmployeeId;
+END;
+GO
+CREATE TRIGGER TR_Payroll_UpdatedAt ON Payroll AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    UPDATE Payroll SET UpdatedAt = GETDATE() FROM Payroll p INNER JOIN inserted i ON p.PayrollId = i.PayrollId;
+END;
+GO
+
+-- Business automation
+CREATE TRIGGER TR_Sales_UpdatePlotStatus ON Sales AFTER UPDATE AS
+BEGIN SET NOCOUNT ON;
+    IF UPDATE(Status)
+    BEGIN
+        UPDATE Plots SET Status = 'Sold', BuyerId = i.BuyerId, UpdatedAt = GETDATE()
+        FROM Plots p INNER JOIN inserted i ON p.PlotId = i.PlotId
+        WHERE i.Status = 'Completed'
+          AND EXISTS (SELECT 1 FROM deleted d WHERE d.SaleId = i.SaleId AND d.Status <> 'Completed');
+    END
+END;
+GO
+
+CREATE TRIGGER TR_Transactions_UpdateInstallment ON Transactions AFTER INSERT AS
+BEGIN SET NOCOUNT ON;
+    UPDATE Installments
+    SET PaidAmount = PaidAmount + i.Amount,
+        Status = CASE 
+            WHEN (PaidAmount + i.Amount) >= Amount THEN 'Paid'
+            WHEN (PaidAmount + i.Amount) > 0 THEN 'Partial'
+            ELSE Status
+        END,
+        PaidDate = CASE WHEN (PaidAmount + i.Amount) >= Amount THEN i.Date ELSE PaidDate END,
+        TransactionId = i.TransactionId,
+        UpdatedAt = GETDATE()
+    FROM Installments inst INNER JOIN inserted i ON inst.InstallmentId = i.InstallmentId
+    WHERE i.InstallmentId IS NOT NULL;
+END;
+GO
+
+CREATE TRIGGER TR_Sales_AutoCalculateCommission ON Sales AFTER INSERT, UPDATE AS
+BEGIN SET NOCOUNT ON;
+    INSERT INTO Commissions (SaleId, AgentId, CommissionPercent, CommissionAmount, Status)
+    SELECT i.SaleId, i.AgentId, i.CommissionPercent, (i.SalePrice * i.CommissionPercent / 100), 'Pending'
+    FROM inserted i
+    WHERE i.AgentId IS NOT NULL AND i.CommissionPercent IS NOT NULL AND i.CommissionPercent > 0
+      AND NOT EXISTS (SELECT 1 FROM Commissions c WHERE c.SaleId = i.SaleId AND c.AgentId = i.AgentId);
+
+    UPDATE c SET CommissionAmount = (i.SalePrice * i.CommissionPercent / 100),
+                 CommissionPercent = i.CommissionPercent, UpdatedAt = GETDATE()
+    FROM Commissions c INNER JOIN inserted i ON c.SaleId = i.SaleId
+    WHERE i.AgentId IS NOT NULL AND i.CommissionPercent IS NOT NULL AND c.Status = 'Pending';
+END;
+GO
+
+CREATE TRIGGER TR_CapitalInjections_UpdatePartnerInvestment ON CapitalInjections AFTER INSERT AS
+BEGIN SET NOCOUNT ON;
+    UPDATE PartnerInvestments
+    SET CapitalInjected = CapitalInjected + i.Amount, UpdatedAt = GETDATE()
+    FROM PartnerInvestments pi INNER JOIN inserted i ON pi.PartnerInvestmentId = i.PartnerInvestmentId;
+END;
+GO
+
+CREATE TRIGGER TR_ProfitDistributionDetails_UpdatePartnerInvestment ON ProfitDistributionDetails AFTER INSERT AS
+BEGIN SET NOCOUNT ON;
+    UPDATE PartnerInvestments
+    SET ProfitCredited = ProfitCredited + i.ProfitAmount, UpdatedAt = GETDATE()
+    FROM PartnerInvestments pi INNER JOIN inserted i ON pi.PartnerInvestmentId = i.PartnerInvestmentId
+    WHERE i.Status = 'Credited';
+END;
+GO
+
+CREATE TRIGGER TR_SaleBuyers_ValidateOwnership
+ON SaleBuyers
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF EXISTS (
+        SELECT SaleId
+        FROM SaleBuyers
+        GROUP BY SaleId
+        HAVING SUM(OwnershipPercent) > 100
+    )
+    BEGIN
+        ROLLBACK TRANSACTION;
+        THROW 51000, 'Total ownership percentage for a sale cannot exceed 100%', 1;
+    END
+END;
+GO
+
+CREATE TRIGGER TR_Transactions_UpdateBankBalance ON Transactions AFTER INSERT, UPDATE, DELETE AS
+BEGIN SET NOCOUNT ON;
+    IF EXISTS (SELECT 1 FROM inserted)
+    BEGIN
+        UPDATE BankAccounts
+        SET Balance = Balance + CASE 
+                WHEN i.Type IN ('Payment','Commission','SellerPayment') THEN i.Amount
+                WHEN i.Type IN ('Withdrawal','PartnerWithdrawal','Refund') THEN -i.Amount
+                ELSE 0
+            END, UpdatedAt = GETDATE()
+        FROM BankAccounts ba INNER JOIN inserted i ON ba.AccountId = i.AccountId
+        WHERE i.AccountId IS NOT NULL;
+    END
+
+    IF EXISTS (SELECT 1 FROM deleted)
+    BEGIN
+        UPDATE BankAccounts
+        SET Balance = Balance - CASE 
+                WHEN d.Type IN ('Payment','Commission','SellerPayment') THEN d.Amount
+                WHEN d.Type IN ('Withdrawal','PartnerWithdrawal','Refund') THEN -d.Amount
+                ELSE 0
+            END, UpdatedAt = GETDATE()
+        FROM BankAccounts ba INNER JOIN deleted d ON ba.AccountId = d.AccountId
+        WHERE d.AccountId IS NOT NULL;
+    END
+END;
+GO
+
+-- =========================
+-- SECTION 14: SEED DATA
+-- =========================
+INSERT INTO Users (Name, Email, PasswordHash, Role, IsActive)
+VALUES ('System Administrator', 'admin@realestate.com', 'HASHED_PASSWORD_HERE', 'Admin', 1);
+GO
+
+-- =========================
+-- END OF SCRIPT
+-- =========================
+PRINT '================================================';
+PRINT 'Real Estate Management System Database V3 Ready.';
+PRINT 'Tables created: core + payroll + finance modules';
+PRINT 'Views: sales, aging, plots, commissions, partner, ledgers, MPR';
+PRINT 'Stored Procedures: payment plans, payments, profit dist, plot sold, capital, seller/commission payments';
+PRINT 'Triggers: audit + automation';
+PRINT 'Indexes intentionally omitted per requirement.';
+PRINT '================================================';
+GO
+
