@@ -1,0 +1,153 @@
+<Page x:Class="Project.Pages.PlotVisualDashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Title="Plot Visual Dashboard" 
+      Background="{StaticResource BackgroundColor}">
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="32">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Page Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,32">
+                <TextBlock Text="📊 Plot Visual Dashboard" 
+                         FontSize="32" 
+                         FontWeight="Bold"
+                         Foreground="{StaticResource TextPrimaryColor}"
+                         Margin="0,0,0,8"
+                         TextOptions.TextFormattingMode="Display"
+                         TextOptions.TextRenderingMode="ClearType"/>
+                <TextBlock Text="Visual representation and status of plots"
+                         FontSize="16"
+                         Foreground="{StaticResource TextSecondaryColor}"
+                         TextOptions.TextFormattingMode="Display"
+                         TextOptions.TextRenderingMode="ClearType"/>
+            </StackPanel>
+            
+            <!-- Filter Controls -->
+            <Border Grid.Row="1" 
+                  Style="{StaticResource CardStyle}"
+                  Margin="0,0,0,24">
+                <StackPanel Margin="24">
+                    <TextBlock Text="Filters" 
+                             FontSize="20" 
+                             FontWeight="SemiBold"
+                             Foreground="{StaticResource TextPrimaryColor}"
+                             Margin="0,0,0,20"
+                             TextOptions.TextFormattingMode="Display"
+                             TextOptions.TextRenderingMode="ClearType"/>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Select Project" 
+                                     FontSize="14" 
+                                     FontWeight="Medium"
+                                     Foreground="{StaticResource TextPrimaryColor}"
+                                     Margin="0,0,0,8"
+                                     TextOptions.TextFormattingMode="Display"
+                                     TextOptions.TextRenderingMode="ClearType"/>
+                            <ComboBox x:Name="cmbProject" 
+                                    Style="{StaticResource ModernComboBoxStyle}"
+                                    Height="40"
+                                    SelectionChanged="CmbProject_SelectionChanged"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Status Filter" 
+                                     FontSize="14" 
+                                     FontWeight="Medium"
+                                     Foreground="{StaticResource TextPrimaryColor}"
+                                     Margin="0,0,0,8"
+                                     TextOptions.TextFormattingMode="Display"
+                                     TextOptions.TextRenderingMode="ClearType"/>
+                            <ComboBox x:Name="cmbStatusFilter" 
+                                    Style="{StaticResource ModernComboBoxStyle}"
+                                    Height="40"
+                                    SelectionChanged="CmbStatusFilter_SelectionChanged"/>
+                        </StackPanel>
+                        
+                        <Button Content="Refresh" 
+                              Grid.Column="4"
+                              Style="{StaticResource PrimaryButtonStyle}"
+                              Width="120"
+                              Height="40"
+                              VerticalAlignment="Bottom"
+                              Margin="0,0,0,0"
+                              Click="BtnRefresh_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            
+            <!-- Visual Grid -->
+            <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+                <StackPanel Margin="24">
+                    <TextBlock Text="Plot Grid View" 
+                             FontSize="20" 
+                             FontWeight="SemiBold"
+                             Foreground="{StaticResource TextPrimaryColor}"
+                             Margin="0,0,0,20"
+                             TextOptions.TextFormattingMode="Display"
+                             TextOptions.TextRenderingMode="ClearType"/>
+                    
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="plotGrid">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="5" Rows="4"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="{StaticResource DividerColor}" 
+                                          BorderThickness="2" 
+                                          Margin="4" 
+                                          Padding="12"
+                                          Background="{Binding StatusColor}">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding PlotNo}" 
+                                                     FontSize="16" 
+                                                     FontWeight="Bold"
+                                                     HorizontalAlignment="Center"
+                                                     Margin="0,0,0,8"
+                                                     TextOptions.TextFormattingMode="Display"
+                                                     TextOptions.TextRenderingMode="ClearType"/>
+                                            <TextBlock Text="{Binding Status}" 
+                                                     FontSize="12"
+                                                     HorizontalAlignment="Center"
+                                                     Foreground="{Binding TextColor}"
+                                                     TextOptions.TextFormattingMode="Display"
+                                                     TextOptions.TextRenderingMode="ClearType"/>
+                                            <TextBlock Text="{Binding Size, StringFormat='{}{0:N2} marla'}" 
+                                                     FontSize="11"
+                                                     HorizontalAlignment="Center"
+                                                     Foreground="{Binding TextColor}"
+                                                     Margin="0,4,0,0"
+                                                     TextOptions.TextFormattingMode="Display"
+                                                     TextOptions.TextRenderingMode="ClearType"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Page>
+

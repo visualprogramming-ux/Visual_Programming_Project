@@ -1,0 +1,198 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|c:\\users\\pc\\desktop\\visual programming project\\vp\\vp\\pages\\page48page.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|solutionrelative:pages\\page48page.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|c:\\users\\pc\\desktop\\visual programming project\\vp\\vp\\data\\salesdataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|solutionrelative:data\\salesdataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|c:\\users\\pc\\desktop\\visual programming project\\vp\\vp\\data\\partymanagementdataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|solutionrelative:data\\partymanagementdataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|c:\\users\\pc\\desktop\\visual programming project\\vp\\vp\\data\\partydataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|solutionrelative:data\\partydataaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|c:\\users\\pc\\desktop\\visual programming project\\vp\\vp\\pages\\customerledgerreceivablesmanagementpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|solutionrelative:pages\\customerledgerreceivablesmanagementpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|c:\\users\\pc\\desktop\\visual programming project\\vp\\vp\\pages\\customerledgerreceivablesmanagementpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|solutionrelative:pages\\customerledgerreceivablesmanagementpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|c:\\users\\pc\\desktop\\visual programming project\\vp\\vp\\pages\\ownershipmappingpage.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|solutionrelative:pages\\ownershipmappingpage.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|c:\\users\\pc\\desktop\\visual programming project\\vp\\vp\\pages\\loginpage.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|solutionrelative:pages\\loginpage.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|c:\\users\\pc\\desktop\\visual programming project\\vp\\vp\\pages\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|solutionrelative:pages\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|c:\\users\\pc\\desktop\\visual programming project\\vp\\vp\\pages\\ownershipmappingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|solutionrelative:pages\\ownershipmappingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|c:\\users\\pc\\desktop\\visual programming project\\vp\\vp\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{271352E8-46AD-49E8-A118-6740284FCECB}|Project.csproj|solutionrelative:mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SalesDataAccess.cs",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Data\\SalesDataAccess.cs",
+              "RelativeDocumentMoniker": "Data\\SalesDataAccess.cs",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Data\\SalesDataAccess.cs",
+              "RelativeToolTip": "Data\\SalesDataAccess.cs",
+              "ViewState": "AgIAAOkAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T06:49:43.146Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PartyManagementDataAccess.cs",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Data\\PartyManagementDataAccess.cs",
+              "RelativeDocumentMoniker": "Data\\PartyManagementDataAccess.cs",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Data\\PartyManagementDataAccess.cs",
+              "RelativeToolTip": "Data\\PartyManagementDataAccess.cs",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T06:49:04.897Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PartyDataAccess.cs",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Data\\PartyDataAccess.cs",
+              "RelativeDocumentMoniker": "Data\\PartyDataAccess.cs",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Data\\PartyDataAccess.cs",
+              "RelativeToolTip": "Data\\PartyDataAccess.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T06:48:44.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Page48Page.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\Page48Page.xaml.cs",
+              "RelativeDocumentMoniker": "Pages\\Page48Page.xaml.cs",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\Page48Page.xaml.cs",
+              "RelativeToolTip": "Pages\\Page48Page.xaml.cs",
+              "ViewState": "AgIAAKUAAAAAAAAAAIAwwNQAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-26T06:47:15.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CustomerLedgerReceivablesManagementPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\CustomerLedgerReceivablesManagementPage.xaml.cs",
+              "RelativeDocumentMoniker": "Pages\\CustomerLedgerReceivablesManagementPage.xaml.cs",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\CustomerLedgerReceivablesManagementPage.xaml.cs",
+              "RelativeToolTip": "Pages\\CustomerLedgerReceivablesManagementPage.xaml.cs",
+              "ViewState": "AgIAAKAAAAAAAAAAAAAqwB0AAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-25T17:35:24.744Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CustomerLedgerReceivablesManagementPage.xaml",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\CustomerLedgerReceivablesManagementPage.xaml",
+              "RelativeDocumentMoniker": "Pages\\CustomerLedgerReceivablesManagementPage.xaml",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\CustomerLedgerReceivablesManagementPage.xaml",
+              "RelativeToolTip": "Pages\\CustomerLedgerReceivablesManagementPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-25T17:35:09.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LoginPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\LoginPage.xaml.cs",
+              "RelativeDocumentMoniker": "Pages\\LoginPage.xaml.cs",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\LoginPage.xaml.cs",
+              "RelativeToolTip": "Pages\\LoginPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T19:09:53.307Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OwnershipMappingPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\OwnershipMappingPage.xaml.cs",
+              "RelativeDocumentMoniker": "Pages\\OwnershipMappingPage.xaml.cs",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\OwnershipMappingPage.xaml.cs",
+              "RelativeToolTip": "Pages\\OwnershipMappingPage.xaml.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T19:09:30.164Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "OwnershipMappingPage.xaml",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\OwnershipMappingPage.xaml",
+              "RelativeDocumentMoniker": "Pages\\OwnershipMappingPage.xaml",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\OwnershipMappingPage.xaml",
+              "RelativeToolTip": "Pages\\OwnershipMappingPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-22T19:09:20.727Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LoginPage.xaml",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\LoginPage.xaml",
+              "RelativeDocumentMoniker": "Pages\\LoginPage.xaml",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\Pages\\LoginPage.xaml",
+              "RelativeToolTip": "Pages\\LoginPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-22T19:09:15.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "MainPage.xaml.cs",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Visual Programming project\\VP\\VP\\MainPage.xaml.cs",
+              "RelativeToolTip": "MainPage.xaml.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAUwAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T18:38:04.9Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

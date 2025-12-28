@@ -1,0 +1,221 @@
+<Page x:Class="Project.Pages.OwnershipMappingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Title="Ownership Mapping" 
+      Background="{StaticResource BackgroundColor}">
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="32">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Page Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,32">
+                <TextBlock Text="🔗 Ownership Mapping" 
+                         FontSize="32" 
+                         FontWeight="Bold"
+                         Foreground="{StaticResource TextPrimaryColor}"
+                         Margin="0,0,0,8"
+                         TextOptions.TextFormattingMode="Display"
+                         TextOptions.TextRenderingMode="ClearType"/>
+                <TextBlock Text="Link plots to buyers and sellers"
+                         FontSize="16"
+                         Foreground="{StaticResource TextSecondaryColor}"
+                         TextOptions.TextFormattingMode="Display"
+                         TextOptions.TextRenderingMode="ClearType"/>
+            </StackPanel>
+            
+            <!-- Input Form -->
+            <Border Grid.Row="1" 
+                  Style="{StaticResource CardStyle}"
+                  Margin="0,0,0,24">
+                <StackPanel Margin="24">
+                    <TextBlock Text="Add/Edit Ownership Mapping" 
+                             FontSize="20" 
+                             FontWeight="SemiBold"
+                             Foreground="{StaticResource TextPrimaryColor}"
+                             Margin="0,0,0,20"
+                             TextOptions.TextFormattingMode="Display"
+                             TextOptions.TextRenderingMode="ClearType"/>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!-- Plot -->
+                        <StackPanel Grid.Row="0" Grid.Column="0">
+                            <TextBlock Text="Plot" 
+                                     FontSize="14" 
+                                     FontWeight="Medium"
+                                     Foreground="{StaticResource TextPrimaryColor}"
+                                     Margin="0,0,0,8"
+                                     TextOptions.TextFormattingMode="Display"
+                                     TextOptions.TextRenderingMode="ClearType"/>
+                            <ComboBox x:Name="cmbPlot" 
+                                    Style="{StaticResource ModernComboBoxStyle}"
+                                    Height="40">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding PlotNo}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        
+                        <!-- Buyer/Seller -->
+                        <StackPanel Grid.Row="0" Grid.Column="2">
+                            <TextBlock Text="Buyer/Seller" 
+                                     FontSize="14" 
+                                     FontWeight="Medium"
+                                     Foreground="{StaticResource TextPrimaryColor}"
+                                     Margin="0,0,0,8"
+                                     TextOptions.TextFormattingMode="Display"
+                                     TextOptions.TextRenderingMode="ClearType"/>
+                            <ComboBox x:Name="cmbBuyerSeller" 
+                                    Style="{StaticResource ModernComboBoxStyle}"
+                                    Height="40">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        
+                        <!-- Ownership Type -->
+                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,16,0,0">
+                            <TextBlock Text="Ownership Type" 
+                                     FontSize="14" 
+                                     FontWeight="Medium"
+                                     Foreground="{StaticResource TextPrimaryColor}"
+                                     Margin="0,0,0,8"
+                                     TextOptions.TextFormattingMode="Display"
+                                     TextOptions.TextRenderingMode="ClearType"/>
+                            <ComboBox x:Name="cmbOwnershipType" 
+                                    Style="{StaticResource ModernComboBoxStyle}"
+                                    Height="40"/>
+                        </StackPanel>
+                        
+                        <!-- Date -->
+                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,16,0,0">
+                            <TextBlock Text="Date" 
+                                     FontSize="14" 
+                                     FontWeight="Medium"
+                                     Foreground="{StaticResource TextPrimaryColor}"
+                                     Margin="0,0,0,8"
+                                     TextOptions.TextFormattingMode="Display"
+                                     TextOptions.TextRenderingMode="ClearType"/>
+                            <DatePicker x:Name="dpDate" 
+                                      Height="40"/>
+                        </StackPanel>
+                        
+                        <!-- Amount -->
+                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,16,0,0">
+                            <TextBlock Text="Amount" 
+                                     FontSize="14" 
+                                     FontWeight="Medium"
+                                     Foreground="{StaticResource TextPrimaryColor}"
+                                     Margin="0,0,0,8"
+                                     TextOptions.TextFormattingMode="Display"
+                                     TextOptions.TextRenderingMode="ClearType"/>
+                            <TextBox x:Name="txtAmount" 
+                                   Style="{StaticResource ModernTextBoxStyle}"
+                                   Height="40"/>
+                        </StackPanel>
+                        
+                        <!-- Notes -->
+                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,16,0,0">
+                            <TextBlock Text="Notes" 
+                                     FontSize="14" 
+                                     FontWeight="Medium"
+                                     Foreground="{StaticResource TextPrimaryColor}"
+                                     Margin="0,0,0,8"
+                                     TextOptions.TextFormattingMode="Display"
+                                     TextOptions.TextRenderingMode="ClearType"/>
+                            <TextBox x:Name="txtNotes" 
+                                   Style="{StaticResource ModernTextBoxStyle}"
+                                   Height="80"
+                                   TextWrapping="Wrap"
+                                   AcceptsReturn="True"
+                                   VerticalScrollBarVisibility="Auto"/>
+                        </StackPanel>
+                        
+                        <!-- Buttons -->
+                        <StackPanel Grid.Row="4" 
+                                  Grid.Column="0" 
+                                  Grid.ColumnSpan="3"
+                                  Orientation="Horizontal"
+                                  HorizontalAlignment="Right"
+                                  Margin="0,24,0,0">
+                            <Button Content="Save" 
+                                  Style="{StaticResource PrimaryButtonStyle}"
+                                  Width="120"
+                                  Height="40"
+                                  Margin="0,0,12,0"
+                                  Click="BtnSave_Click"/>
+                            <Button Content="Clear" 
+                                  Style="{StaticResource SecondaryButtonStyle}"
+                                  Width="120"
+                                  Height="40"
+                                  Margin="0,0,12,0"
+                                  Click="BtnClear_Click"/>
+                            <Button Content="Delete" 
+                                  Style="{StaticResource SecondaryButtonStyle}"
+                                  Width="120"
+                                  Height="40"
+                                  Click="BtnDelete_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            
+            <!-- Data Grid -->
+            <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+                <StackPanel Margin="24">
+                    <TextBlock Text="Ownership Mappings" 
+                             FontSize="20" 
+                             FontWeight="SemiBold"
+                             Foreground="{StaticResource TextPrimaryColor}"
+                             Margin="0,0,0,20"
+                             TextOptions.TextFormattingMode="Display"
+                             TextOptions.TextRenderingMode="ClearType"/>
+                    
+                    <DataGrid x:Name="dgOwnership" 
+                            Style="{StaticResource ModernDataGridStyle}"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            IsReadOnly="True"
+                            SelectionMode="Single"
+                            SelectionChanged="DgOwnership_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Plot No" Binding="{Binding PlotNo}" Width="120"/>
+                            <DataGridTextColumn Header="Buyer/Seller" Binding="{Binding BuyerSellerName}" Width="*"/>
+                            <DataGridTextColumn Header="Type" Binding="{Binding OwnershipType}" Width="150"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='{}{0:yyyy-MM-dd}'}" Width="120"/>
+                            <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat='{}{0:N2}'}" Width="150"/>
+                            <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Page>
+

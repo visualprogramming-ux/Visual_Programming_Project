@@ -1,0 +1,292 @@
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Project.exe
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Project.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.SqlServer.Server.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Azure.Core.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Azure.Identity.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.Bcl.Cryptography.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.Data.SqlClient.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.Identity.Client.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Protocols.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\System.ClientModel.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\System.Configuration.ConfigurationManager.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\System.Diagnostics.EventLog.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\System.Memory.Data.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\System.Security.Cryptography.Pkcs.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\cs\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\de\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\es\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\fr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\it\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\ja\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\ko\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\pl\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\pt-BR\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\ru\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\tr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\MainPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\CustomerLedgerReceivablesManagementPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\CustomerStatementsPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\LedgerViewPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\LoginPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\OwnershipMappingPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\Page48Page.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\PlotManagementPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\PlotVisualDashboardPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\ProjectManagementPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\QuickEntryPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\ReceivablesAgingReportPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\WelcomePage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\MainPage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\CustomerLedgerReceivablesManagementPage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\CustomerStatementsPage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\LedgerViewPage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\LoginPage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\OwnershipMappingPage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\Page48Page.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\PlotManagementPage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\PlotVisualDashboardPage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\ProjectManagementPage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\QuickEntryPage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\ReceivablesAgingReportPage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\WelcomePage.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project_MarkupCompile.cache
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project_MarkupCompile.lref
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\App.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project.g.resources
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project.AssemblyInfoInputs.cache
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project.AssemblyInfo.cs
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project.csproj.CoreCompileInputs.cache
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project.csproj.Up2Date
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project.dll
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\refint\Project.dll
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project.pdb
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Project.deps.json
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Project.runtimeconfig.json
+C:\Users\hp\Desktop\VP\bin\Debug\net8.0-windows\Project.pdb
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Project.genruntimeconfig.cache
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\ref\Project.dll
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\CreateAccountPage.baml
+C:\Users\hp\Desktop\VP\obj\Debug\net8.0-windows\Pages\CreateAccountPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Project.exe
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Project.deps.json
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Project.runtimeconfig.json
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Project.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Project.pdb
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Azure.Core.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Azure.Identity.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.Bcl.Cryptography.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.Data.SqlClient.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.Identity.Client.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Protocols.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\Microsoft.SqlServer.Server.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\System.ClientModel.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\System.Configuration.ConfigurationManager.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\System.Diagnostics.EventLog.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\System.Memory.Data.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\System.Security.Cryptography.Pkcs.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\cs\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\de\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\es\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\fr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\it\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\ja\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\ko\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\pl\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\pt-BR\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\ru\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\tr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project.csproj.AssemblyReference.cache
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\MainPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\CreateAccountPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\CustomerLedgerReceivablesManagementPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\CustomerStatementsPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\LedgerViewPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\LoginPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\OwnershipMappingPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\Page48Page.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\PlotManagementPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\PlotVisualDashboardPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\ProjectManagementPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\QuickEntryPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\ReceivablesAgingReportPage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\WelcomePage.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\MainPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\CreateAccountPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\CustomerLedgerReceivablesManagementPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\CustomerStatementsPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\LedgerViewPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\LoginPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\OwnershipMappingPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\Page48Page.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\PlotManagementPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\PlotVisualDashboardPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\ProjectManagementPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\QuickEntryPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\ReceivablesAgingReportPage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Pages\WelcomePage.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project_MarkupCompile.cache
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project_MarkupCompile.lref
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\App.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project.g.resources
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project.AssemblyInfoInputs.cache
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project.AssemblyInfo.cs
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project.csproj.CoreCompileInputs.cache
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project.csproj.Up2Date
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\refint\Project.dll
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project.pdb
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\Project.genruntimeconfig.cache
+C:\Users\pc\Desktop\Visual Programming project\VP\VP\obj\Debug\net8.0-windows\ref\Project.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Project.exe
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Project.deps.json
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Project.runtimeconfig.json
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Project.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Project.pdb
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Azure.Core.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Azure.Identity.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.Bcl.Cryptography.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.Data.SqlClient.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.Identity.Client.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Protocols.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\Microsoft.SqlServer.Server.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\System.ClientModel.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\System.Configuration.ConfigurationManager.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\System.Diagnostics.EventLog.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\System.Memory.Data.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\System.Security.Cryptography.Pkcs.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\cs\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\de\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\es\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\fr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\it\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\ja\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\ko\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\pl\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\pt-BR\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\ru\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\tr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project.csproj.AssemblyReference.cache
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\MainPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\CreateAccountPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\CustomerLedgerReceivablesManagementPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\CustomerStatementsPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\LedgerViewPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\LoginPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\OwnershipMappingPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\Page48Page.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\PlotManagementPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\PlotVisualDashboardPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\ProjectManagementPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\QuickEntryPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\ReceivablesAgingReportPage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\WelcomePage.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\MainPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\CreateAccountPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\CustomerLedgerReceivablesManagementPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\CustomerStatementsPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\LedgerViewPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\LoginPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\OwnershipMappingPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\Page48Page.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\PlotManagementPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\PlotVisualDashboardPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\ProjectManagementPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\QuickEntryPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\ReceivablesAgingReportPage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Pages\WelcomePage.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project_MarkupCompile.cache
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project_MarkupCompile.lref
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\App.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project.g.resources
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project.AssemblyInfoInputs.cache
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project.AssemblyInfo.cs
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project.csproj.CoreCompileInputs.cache
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project.sourcelink.json
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project.csproj.Up2Date
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\refint\Project.dll
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project.pdb
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\Project.genruntimeconfig.cache
+C:\Users\arsha\Documents\University Work Semester 3\Visual Programming\Project\VP\obj\Debug\net8.0-windows\ref\Project.dll
